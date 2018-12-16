@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 
 //Connexion à la base de donnée
-mongoose.connect('mongodb://localhost/db', { useNewUrlParser: true }).then(() => {
+mongoose.connect('mongodb://mongo/mern-demo', { useNewUrlParser: true }).then(() => {
     console.log('Connected to mongoDB')
 }).catch(e => {
     console.log('Error while DB connecting');
@@ -35,6 +35,11 @@ var router = express.Router();
 app.use('/user', router);
 require(__dirname + '/controllers/userController')(router);
 
+//On définit la route Hello
+app.get('/hello',function(req,res){
+    res.json("Hello World")
+})
+
 //Définition et mise en place du port d'écoute
-var port = 8000;
+var port = 3000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
